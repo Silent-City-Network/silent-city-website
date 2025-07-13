@@ -1,104 +1,111 @@
-// --- Simple Node.js & Express Server for Silent City ---
-// This server is designed to receive and log data from the frontend.
+// --- Professional Node.js & Express Server for Silent City ---
+// This server handles B2B partner inquiries via email and data opt-out requests.
 
 // 1. SETUP
 // To run this server, you need Node.js installed.
 // Open your terminal, navigate to the directory where you saved this file, and run:
-// > npm install express cors
+// > npm install express cors nodemailer
 // Then, start the server with:
 // > node server.js
 // The server will be running on http://localhost:3000
 
 const express = require('express');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = 3000;
 
 // 2. MIDDLEWARE
-// Enable Cross-Origin Resource Sharing (CORS) so the frontend (on a different port) can communicate with the server.
 app.use(cors());
-// Enable the server to parse JSON formatted request bodies.
 app.use(express.json());
 
-// 3. ROUTES
-// These are the endpoints that the frontend will send data to.
-
-/**
- * @route   POST /track
- * @desc    Receives and logs user interaction data.
- * @access  Public
- */
-app.post('/track', (req, res) => {
-    console.log('--- User Action Received ---');
-    console.log('User ID:', req.body.userId);
-    console.log('Action:', req.body.action);
-    console.log('Details:', req.body.details);
-    console.log('Timestamp:', new Date().toISOString());
-    console.log('--------------------------\n');
-    res.status(200).json({ message: 'Action tracked successfully' });
+// 3. NODEMAILER CONFIGURATION
+// For this demo, we use a "JSON transport" which doesn't actually send emails
+// but logs them to the console. This is perfect for testing without real credentials.
+// For production, you would replace this with a real SMTP transport (e.g., from Gmail, SendGrid, etc.).
+const transporter = nodemailer.createTransport({
+    jsonTransport: true // Use JSON transport for testing
 });
 
-/**
- * @route   POST /subscribe
- * @desc    Receives a new B2C email subscription.
- * @access  Public
- */
-app.post('/subscribe', (req, res) => {
-    const { email, userId } = req.body;
-    console.log('--- New B2C Subscription ---');
-    console.log('User ID:', userId);
-    console.log('Email:', email);
-    console.log('Timestamp:', new Date().toISOString());
-    console.log('--------------------------\n');
-    
-    // In a real application, you would save this to a database.
-    
-    res.status(200).json({ message: 'Subscription successful' });
+/*
+// EXAMPLE: How to configure for a real email provider like Gmail
+const transporter_prod = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'your-email@gmail.com', // Your email address
+        pass: 'your-app-password'    // Your app-specific password
+    }
 });
+*/
 
-/**
- * @route   POST /suggest-location
- * @desc    Receives a new location suggestion.
- * @access  Public
- */
-app.post('/suggest-location', (req, res) => {
-    const { suggestion, userId } = req.body;
-    console.log('--- New Location Suggestion ---');
-    console.log('User ID:', userId);
-    console.log('Suggestion:', suggestion);
-    console.log('Timestamp:', new Date().toISOString());
-    console.log('-----------------------------\n');
 
-    // In a real application, you would save this to a database.
-
-    res.status(200).json({ message: 'Suggestion received' });
-});
-
+// 4. ROUTES
 
 /**
  * @route   POST /partner
- * @desc    Receives a new B2B partner inquiry.
+ * @desc    Receives a new B2B partner inquiry and sends it via email.
  * @access  Public
  */
-app.post('/partner', (req, res) => {
+app.post('/partner', async (req, res) => {
     const { name, locationName, email, message, userId } = req.body;
-    console.log('--- New B2B Partner Inquiry ---');
-    console.log('User ID:', userId);
-    console.log('Name:', name);
-    console.log('Location Name:', locationName);
-    console.log('Email:', email);
-    console.log('Message:', message);
-    console.log('Timestamp:', new Date().toISOString());
-    console.log('-----------------------------\n');
-    
-    // In a real application, you would save this to a database.
-    
-    res.status(200).json({ message: 'Partner inquiry received' });
+    console.log('--- Received B2B Partner Inquiry ---');
+    console.log(`Data from User ID: ${userId}`);
+
+    // Email content
+    const mailOptions = {
+        from: '"Silent City Website" <noreply@silentcity.app>',
+        to: 'partner@silentcity.app', // The recipient address
+        subject: `Neue Partneranfrage von: ${locationName}`,
+        html: `
+            <h1>Neue Partneranfrage</h1>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Standort:</strong> ${locationName}</p>
+            <p><strong>E-Mail:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p><strong>Nachricht:</strong></p>
+            <p>${message.replace(/\n/g, '<br>')}</p>
+            <hr>
+            <p><em>(User-ID für Tracking: ${userId})</em></p>
+        `
+    };
+
+    try {
+        // Send the email
+        const info = await transporter.sendMail(mailOptions);
+        console.log('--- Email Prepared for Sending ---');
+        console.log('Email JSON:', JSON.parse(info.message)); // Log the email object
+        console.log('----------------------------------\n');
+        res.status(200).json({ message: 'Partner inquiry sent successfully.' });
+    } catch (error) {
+        console.error('--- Email Sending Error ---');
+        console.error(error);
+        console.log('---------------------------\n');
+        res.status(500).json({ message: 'Failed to send partner inquiry.' });
+    }
 });
 
 
-// 4. START SERVER
+/**
+ * @route   POST /opt-out
+ * @desc    Receives a data deletion request.
+ * @access  Public
+ */
+app.post('/opt-out', (req, res) => {
+    const { email, userId } = req.body;
+    console.log('--- DATA DELETION REQUEST (OPT-OUT) ---');
+    console.log(`User with email: ${email} has requested data deletion.`);
+    if (userId) {
+        console.log(`Associated User ID: ${userId}`);
+    }
+    console.log('Timestamp:', new Date().toISOString());
+    console.log('ACTION REQUIRED: In a real application, you would now trigger a script to find the user by email and delete all data associated with this user from your databases and from PostHog via their API.');
+    console.log('--------------------------------------\n');
+
+    res.status(200).json({ message: 'Opt-out request received and logged.' });
+});
+
+
+// 5. START SERVER
 app.listen(PORT, () => {
     console.log(`Silent City server running on http://localhost:${PORT}`);
 });
