@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent City - Dein Fokus-Pod in der Stadt</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #111827; /* Dark Slate */
+            --brand-yellow: #FBBF24; /* Amber 400 */
+            --brand-bordeaux: #991B1B; /* Red 800 */
+            --light-text: #F3F4F6; /* Gray 100 */
+            --dark-text: #1F2937; /* Gray 800 */
+        }
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-weight: 400; /* Set base font weight to normal */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 900; /* Black for all headings */
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .font-semibold {
+            font-weight: 600;
+        }
+        .font-black {
+            font-weight: 900;
+        }
+        .hero-bg {
+            background-image: url('https://i.ibb.co/xtnWHLww/7e6aa348-dbb2-4902-9e52-95857b7f9bb2.png?q=80&w=2864&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+            background-color: var(--brand-yellow);
+            color: var(--dark-text);
+            font-weight: 700;
+        }
+        .cta-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+        }
+        .cta-button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .highlight-bordeaux {
+            color: var(--brand-bordeaux);
+            font-weight: 900;
+        }
+        .yellow-highlight {
+            color: var(--brand-yellow);
+        }
+        #map-placeholder {
+            cursor: pointer;
+            border-radius: 45px;
+        }
+        #map-placeholder:hover {
+            transform: scale(1.02);
+        }
+        #consent-banner {
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 relative">
+
+    <!-- Static Partner Button -->
+    <div class="absolute top-0 right-0 p-4 md:p-8 z-20">
+        <a href="partner.html" id="partner-link" class="bg-gray-900/50 backdrop-blur-sm text-yellow-400 font-semibold py-2 px-5 border border-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-gray-900 transition-colors duration-300">Partner werden</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white min-h-screen flex items-center justify-center pt-20 relative">
+        <div class="bg-black/60 w-full h-full absolute top-0 left-0"></div>
+        <div class="text-center z-10 p-6">
+            <h1 class="text-5xl md:text-9xl font-black mb-4 leading-tight">Silent<span class="text-yellow-400">City</span> </h1>
+            <h2 class="text-4xl md:text-5xl font-black mb-8">Genau hier, genau jetzt.<br /><span class="text-yellow-400">Nur für dich</span></h2>
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto text-gray-200">Buche deine private Kabine für Fokus, Anrufe oder eine kreative Auszeit. Mitten in deinem Lieblingscafé, der Bibliothek oder wo immer du sie brauchst. Minutengenau abrechenbar.</p>
+            <a href="#validation-gate" id="hero-cta" class="cta-button text-lg py-4 px-12 rounded-lg shadow-lg">
+                Finde deinen Pod
+            </a>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-gray-800 section-fade-in">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-black text-white mb-4">Die Stadt ist laut. Dein Kopf muss es nicht sein.</h2>
+            <p class="text-gray-300 max-w-2xl mx-auto mb-12">Du liebst die Energie der Stadt, aber für Deep Work oder vertrauliche Calls brauchst du Ruhe. Cafés, Co-Working-Spaces und das Home-Office stoßen an ihre Grenzen.</p>
+            <div class="grid md:grid-cols-3 gap-8 text-gray-300">
+                <div class="p-8 bg-gray-900 rounded-xl shadow-lg">
+                    <div class="text-yellow-400 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-black mb-2 text-white break-words">Konzentrationskiller</h3>
+                    <p>Ständiger Lärm und visuelle Ablenkungen torpedieren deinen Flow-State.</p>
+                </div>
+                <div class="p-8 bg-gray-900 rounded-xl shadow-lg">
+                    <div class="text-yellow-400 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-black mb-2 text-white">Spontaneität fehlt</h3>
+                    <p>Du brauchst jetzt einen ruhigen Ort, nicht erst nach langer Suche oder Buchung.</p>
+                </div>
+                <div class="p-8 bg-gray-900 rounded-xl shadow-lg">
+                     <div class="text-yellow-400 mb-4">
+                        <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-black mb-2 text-white">Privatsphäre ist Luxus</h3>
+                    <p>Wichtige Gespräche führt man ungern mit fremden Zuhörern.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-20 bg-gray-900 section-fade-in">
+        <div class="container mx-auto px-6">
+            <div class="md:flex items-center gap-16">
+                <div class="md:w-1/2">
+                    <img src="https://i.ibb.co/xtnWHLww/7e6aa348-dbb2-4902-9e52-95857b7f9bb2.png?q=80&w=2787&auto=format&fit=crop" alt="Innenansicht eines modernen, minimalistischen Pods" class="rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="md:w-1/2 mt-8 md:mt-0">
+                    <h2 class="text-4xl font-black text-white mb-4">Dein <span class="yellow-highlight">persönlicher Raum</span> auf Abruf.</h2>
+                    <p class="text-gray-300 mb-8">Silent City ist ein Netzwerk privater Pods, die du per App findest, buchst und öffnest. Einfach, intuitiv und genau dann, wenn du sie brauchst.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-yellow-400 text-gray-900 flex items-center justify-center font-black text-2xl">1</div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-black text-white">Finden</h3>
+                                <p class="text-gray-400">Öffne die App und sieh alle freien Pods in deiner unmittelbaren Nähe.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-yellow-400 text-gray-900 flex items-center justify-center font-black text-2xl">2</div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-black text-white">Buchen</h3>
+                                <p class="text-gray-400">Reserviere minutengenau oder für mehrere Stunden.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-12 w-12 rounded-full bg-yellow-400 text-gray-900 flex items-center justify-center font-black text-2xl">3</div>
+                            <div class="ml-4">
+                                <h3 class="text-xl font-black text-white">Entsperren</h3>
+                                <p class="text-gray-400">Öffne die Tür mit deinem Smartphone und tritt ein in deine Fokus-Zone.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slogan Section -->
+    <section class="min-h-screen flex items-center justify-center bg-yellow-400 text-gray-900 section-fade-in">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-black mb-4">Ich bin, was du aus mir machst.</h2>
+            <p class="text-2xl font-black max-w-4xl mx-auto">
+                Ich bin <span class="highlight-bordeaux">Deep Work</span>. Ich bin <span class="highlight-bordeaux">dein wichtigster Call</span>. Ich bin <span class="highlight-bordeaux">Powernap</span>. Ich bin <span class="highlight-bordeaux">deine nächste große Idee</span>.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Validation Section -->
+    <section id="validation-gate" class="py-20 bg-gray-800 section-fade-in">
+        <div class="container mx-auto px-6 text-center">
+            <!-- Features & Pricing Sub-section -->
+            <div class="mb-16">
+                <h2 class="text-4xl font-black text-white mb-4">Perfekt ausgestattet für deinen Moment.</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto mb-12">Jeder Pod ist deine persönliche High-Performance-Kammer. Kein Schnickschnack, nur das, was du wirklich brauchst.</p>
+                <div class="max-w-4xl mx-auto bg-gray-900 rounded-lg shadow-xl p-8 md:flex items-center">
+                    <div class="md:w-1/2">
+                         <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2811&auto=format&fit=crop" alt="Detailansicht der Ausstattung: Tisch, Steckdose, Licht" class="rounded-lg shadow-md mb-6 md:mb-0">
+                    </div>
+                    <div class="md:w-1/2 md:pl-10 text-left">
+                        <ul class="space-y-4 text-gray-200 mb-8">
+                            <li class="flex items-center text-lg"><svg class="w-6 h-6 text-yellow-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="font-bold">Schallisoliert</span><span class="ml-2 font-semibold">für absolute Ruhe</span></li>
+                            <li class="flex items-center text-lg"><svg class="w-6 h-6 text-yellow-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="font-bold">Strom & High-Speed WLAN</span></li>
+                            <li class="flex items-center text-lg"><svg class="w-6 h-6 text-yellow-400 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span class="font-bold">Belüftung & Fokus-Licht</span></li>
+                        </ul>
+                        <div class="bg-gray-800 p-6 rounded-lg text-center border-2 border-yellow-400">
+                            <p class="text-lg text-gray-300">Verfügbar ab</p>
+                            <p class="text-5xl font-black text-yellow-400 my-2">0,40 €</p>
+                            <p class="text-gray-400">pro Minute</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map CTA Sub-section -->
+            <div id="map-cta-section" class="mt-20">
+                <h2 class="text-4xl font-black text-white mb-4">Finde einen Pod in deiner Nähe.</h2>
+                <p class="text-gray-300 max-w-2xl mx-auto mb-12">Klicke auf die Karte, um verfügbare Pods in Berlin zu entdecken und deinen privaten Raum zu buchen.</p>
+                <div id="map-container" class="mt-12 max-w-lg mx-auto">
+                    <img id="map-placeholder" src="https://i.ibb.co/83YjsQY/6852b25c-b174-4b2d-ada9-e6747b92a488-removebg-preview.png" alt="Platzhalter-Karte von Berlin" class="w-full">
+                </div>
+            </div>
+
+            <!-- Email Signup Section (Fake Door) -->
+            <div id="fake-door-response" class="mt-12 max-w-2xl mx-auto text-left" style="display: none;">
+                <div id="email-capture-box" class="bg-green-900/50 border-l-4 border-green-400 text-green-200 p-6 rounded-lg shadow-md">
+                    <h3 class="text-3xl font-black mb-2 text-white">Super! Wir sind bald startklar.</h3>
+                    <p class="mb-4 text-green-300">Gib uns deine E-Mail und wir melden uns, sobald die ersten Pods in Berlin verfügbar sind. Als Dankeschön erhältst du ein <span class="font-bold text-yellow-400">Startguthaben von 10 €</span>.</p>
+                    <form id="email-form">
+                        <input type="email" id="email-input" placeholder="deine.email@adresse.de" required class="w-full p-4 bg-gray-700 border border-gray-600 rounded-lg mb-3 focus:ring-2 focus:ring-yellow-400 text-white text-lg">
+                        <div class="flex items-center my-4">
+                            <input type="checkbox" id="privacy-consent-email" class="h-4 w-4 text-yellow-400 bg-gray-700 border-gray-600 rounded focus:ring-yellow-500">
+                            <label for="privacy-consent-email" class="ml-2 text-sm text-gray-400">Ich habe die <a href="#" class="underline hover:text-yellow-400">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.</label>
+                        </div>
+                        <button type="submit" id="email-submit-button" class="w-full cta-button text-lg py-3 px-6 rounded-lg" disabled>Zugang sichern</button>
+                    </form>
+                </div>
+
+                <!-- Suggestion Box (Initially hidden) -->
+                <div id="suggestion-box" class="mt-8 bg-gray-900 p-8 rounded-lg" style="display: none;">
+                    <h3 class="text-3xl font-black mb-2 text-white">Danke! Eine letzte Frage...</h3>
+                    <p class="mb-4 text-gray-300">Du bist jetzt auf der Liste. Um dir den besten Service zu bieten: Wo würdest du dir am dringendsten einen Silent Pod wünschen?</p>
+                    <form id="suggestion-form">
+                         <textarea id="location-input" required placeholder="z.B. 'In der lauten Haupthalle der Uni-Bibliothek' oder 'Direkt am Hauptbahnhof'" class="w-full p-4 bg-gray-700 border border-gray-600 rounded-lg mb-4 focus:ring-2 focus:ring-yellow-400 text-white placeholder-gray-500 text-lg h-28 resize-none"></textarea>
+                         <div class="flex items-center my-4">
+                            <input type="checkbox" id="privacy-consent-suggestion" class="h-4 w-4 text-yellow-400 bg-gray-700 border-gray-600 rounded focus:ring-yellow-500">
+                            <label for="privacy-consent-suggestion" class="ml-2 text-sm text-gray-400">Ich stimme zu, dass mein Vorschlag anonymisiert für Planungszwecke verwendet wird.</label>
+                        </div>
+                        <button type="submit" id="suggestion-submit-button" class="w-full cta-button text-lg py-3 px-6 rounded-lg" disabled>Wunsch abschicken</button>
+                    </form>
+                </div>
+                
+                <div id="final-thank-you" class="mt-8 text-center p-6 bg-gray-900 rounded-lg" style="display: none;">
+                    <div id="final-success-box" class="bg-green-900/50 border-l-4 border-green-400 text-green-200 p-6 rounded-lg shadow-md">
+                     <p class="text-2xl font-bold text-yellow-400">Vielen Dank für deine Hilfe!</p>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Section -->
+    <section id="partner" class="py-20 bg-gray-900 section-fade-in">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-black text-white mb-4">Die Zukunft ist <span class="yellow-highlight">Private Space on Demand.</span></h2>
+            <p class="text-gray-300 max-w-3xl mx-auto mb-8">Werden Sie Teil unserer Vision. Bieten Sie Ihren Kunden, Gästen oder Mitarbeitern einen einzigartigen Service und werden Sie zum Hotspot für Produktivität und Ruhe in Ihrer Nachbarschaft.</p>
+            <a href="partner.html" id="partner-cta-bottom" class="cta-button bg-white text-gray-900 text-lg py-4 px-10 rounded-lg border border-gray-300 shadow-md hover:bg-gray-200">Jetzt Partner werden</a>
+        </div>
+    </section>
+
+    <!-- Consent Banner -->
+    <div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900/80 backdrop-blur-md p-5 shadow-2xl z-50" style="display: none;">
+        <div class="container mx-auto md:flex items-center justify-between">
+            <p class="text-gray-300 mb-4 md:mb-0 md:mr-6">Wir nutzen Cookies und ähnliche Technologien, um zu verstehen, wie unsere Seite genutzt wird und um das Nutzererlebnis zu verbessern. Das hilft uns, die richtigen Standorte für unsere Pods zu finden. Sind Sie damit einverstanden?</p>
+            <div class="flex-shrink-0 flex gap-4">
+                <button id="consent-accept" class="bg-yellow-400 text-gray-900 font-bold py-2 px-6 rounded-lg">Akzeptieren</button>
+                <button id="consent-decline" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-lg">Ablehnen</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-black py-10">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 Silent City. Alle Rechte vorbehalten.</p>
+            <div class="mt-4">
+                <a href="#" id="impressum-link" class="hover:text-yellow-400 mx-3">Impressum</a>
+                <a href="#" id="datenschutz-link" class="hover:text-yellow-400 mx-3">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- CONFIG ---
+        const API_URL = 'http://localhost:3000';
+        const CONSENT_KEY = 'silentCityConsent';
+
+        // --- TRACKING LOGIC (will only be initialized after consent) ---
+        let isTrackingInitialized = false;
+
+        function initializeTracking() {
+            if (isTrackingInitialized) return;
+
+            function getOrSetUserId() {
+                let userId = localStorage.getItem('silentCityUserId');
+                if (!userId) {
+                    userId = crypto.randomUUID();
+                    localStorage.setItem('silentCityUserId', userId);
+                }
+                return userId;
+            }
+
+            async function trackAction(action, details = {}) {
+                if (localStorage.getItem(CONSENT_KEY) !== 'granted') return;
+                const userId = getOrSetUserId();
+                try {
+                    await fetch(`${API_URL}/track`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ userId, action, details })
+                    });
+                } catch (error) {
+                    console.error('Tracking error:', error);
+                }
+            }
+            
+            window.trackAction = trackAction;
+            trackAction('page_view', { page: 'landing' });
+            
+            // Add event listeners that depend on tracking
+            document.getElementById('partner-link').addEventListener('click', () => trackAction('partner_link_clicked_top'));
+            document.getElementById('hero-cta').addEventListener('click', () => trackAction('hero_cta_clicked'));
+            document.getElementById('partner-cta-bottom').addEventListener('click', () => trackAction('partner_cta_clicked_bottom'));
+            document.getElementById('impressum-link').addEventListener('click', () => trackAction('impressum_link_clicked'));
+            document.getElementById('datenschutz-link').addEventListener('click', () => trackAction('datenschutz_link_clicked'));
+            document.getElementById('map-placeholder').addEventListener('click', () => trackAction('map_clicked'));
+            document.getElementById('email-form').addEventListener('submit', () => trackAction('email_form_submitted'));
+            document.getElementById('suggestion-form').addEventListener('submit', () => trackAction('suggestion_form_submitted'));
+            
+            document.querySelectorAll('.section-fade-in').forEach(section => {
+                 new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            if(entry.target.classList.contains('visible')) {
+                                trackAction('section_viewed', { sectionId: entry.target.id || 'unknown' });
+                                observer.unobserve(entry.target);
+                            }
+                        }
+                    });
+                }, { threshold: 0.25 }).observe(section);
+            });
+
+            isTrackingInitialized = true;
+            console.log("Tracking initialized.");
+        }
+
+        // --- CONSENT MANAGEMENT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const consent = localStorage.getItem(CONSENT_KEY);
+            const consentBanner = document.getElementById('consent-banner');
+
+            if (consent === 'granted') {
+                initializeTracking();
+            } else if (consent === 'denied') {
+                // Do nothing, tracking is off
+            } else {
+                consentBanner.style.display = 'block';
+            }
+
+            document.getElementById('consent-accept').addEventListener('click', () => {
+                localStorage.setItem(CONSENT_KEY, 'granted');
+                consentBanner.style.opacity = '0';
+                setTimeout(() => consentBanner.style.display = 'none', 500);
+                initializeTracking();
+            });
+
+            document.getElementById('consent-decline').addEventListener('click', () => {
+                localStorage.setItem(CONSENT_KEY, 'denied');
+                consentBanner.style.opacity = '0';
+                setTimeout(() => consentBanner.style.display = 'none', 500);
+            });
+        });
+
+        // --- UI & FORM LOGIC ---
+        const mapPlaceholder = document.getElementById('map-placeholder');
+        const fakeDoorResponse = document.getElementById('fake-door-response');
+
+        mapPlaceholder.addEventListener('click', (e) => {
+            e.preventDefault();
+            fakeDoorResponse.style.display = 'block';
+            fakeDoorResponse.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // --- Multi-step Form Logic ---
+        const emailCaptureBox = document.getElementById('email-capture-box');
+        const emailForm = document.getElementById('email-form');
+        const emailSubmitButton = document.getElementById('email-submit-button');
+        const emailConsentCheckbox = document.getElementById('privacy-consent-email');
+
+        const suggestionBox = document.getElementById('suggestion-box');
+        const suggestionForm = document.getElementById('suggestion-form');
+        const suggestionSubmitButton = document.getElementById('suggestion-submit-button');
+        const suggestionConsentCheckbox = document.getElementById('privacy-consent-suggestion');
+        
+        const finalThankYou = document.getElementById('final-thank-you');
+
+        emailConsentCheckbox.addEventListener('change', () => {
+            emailSubmitButton.disabled = !emailConsentCheckbox.checked;
+        });
+        
+        suggestionConsentCheckbox.addEventListener('change', () => {
+            suggestionSubmitButton.disabled = !suggestionConsentCheckbox.checked;
+        });
+
+        emailForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (emailSubmitButton.disabled) return;
+            const email = document.getElementById('email-input').value;
+            try {
+                const response = await fetch(`${API_URL}/subscribe`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, userId: localStorage.getItem('silentCityUserId') || 'consent_not_given' })
+                });
+                if (!response.ok) throw new Error('Subscription failed');
+                emailCaptureBox.style.display = 'none';
+                suggestionBox.style.display = 'block';
+            } catch (error) {
+                console.error('Subscription error:', error);
+                alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+            }
+        });
+
+        suggestionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (suggestionSubmitButton.disabled) return;
+            const suggestion = document.getElementById('location-input').value;
+            try {
+                const response = await fetch(`${API_URL}/suggest-location`, {
+                     method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ suggestion, userId: localStorage.getItem('silentCityUserId') || 'consent_not_given' })
+                });
+                if (!response.ok) throw new Error('Suggestion submission failed');
+                suggestionBox.style.display = 'none';
+                finalThankYou.style.display = 'block';
+            } catch (error) {
+                console.error('Suggestion submission error:', error);
+                alert('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.');
+            }
+        });
+
+        const sections = document.querySelectorAll('.section-fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => { observer.observe(section); });
+    </script>
+</body>
+</html>
