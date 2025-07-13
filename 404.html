@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Seite nicht gefunden | Silent City</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #111827; /* Dark Slate */
+            --brand-yellow: #FBBF24; /* Amber 400 */
+            --light-text: #F3F4F6; /* Gray 100 */
+            --dark-text: #1F2937; /* Gray 800 */
+        }
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 900; /* Black for all headings */
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .font-black {
+            font-weight: 900;
+        }
+        .cta-button {
+            transition: all 0.3s ease;
+            background-color: var(--brand-yellow);
+            color: var(--dark-text);
+            font-weight: 700;
+        }
+        .cta-button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+
+    <div class="min-h-screen flex flex-col items-center justify-center text-center p-6">
+        <div class="max-w-md">
+            <h1 class="text-9xl font-black text-yellow-400">404</h1>
+            <h2 class="mt-4 text-4xl font-black text-white">Dieser Raum existiert nicht.</h2>
+            <p class="mt-4 text-lg text-gray-300">Ups! Es sieht so aus, als hätten Sie einen Pfad eingeschlagen, der noch nicht erschlossen ist. Aber keine Sorge, es gibt viele andere Orte zu entdecken.</p>
+            <div class="mt-10">
+                <a href="index.html" class="cta-button text-lg py-4 px-12 rounded-lg shadow-lg">
+                    Zurück zur Hauptseite
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
