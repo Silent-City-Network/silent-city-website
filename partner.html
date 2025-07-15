@@ -165,10 +165,13 @@
         </section>
     </main>
 
+    <!-- Consent Blocker -->
+    <div id="consent-blocker" class="fixed inset-0 bg-black/80 z-40" style="display: none;"></div>
+
     <!-- Consent Banner -->
-    <div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900/80 backdrop-blur-md p-5 shadow-2xl z-50" style="display: none;">
+    <div id="consent-banner" class="fixed bottom-0 left-0 right-0 bg-gray-900 p-5 shadow-2xl z-50" style="display: none;">
         <div class="container mx-auto md:flex items-center justify-between">
-            <p class="text-gray-300 mb-4 md:mb-0 md:mr-6">Wir nutzen Cookies und ähnliche Technologien, um zu verstehen, wie unsere Seite genutzt wird und um das Nutzererlebnis zu verbessern. Das hilft uns, die richtigen Standorte für unsere Pods zu finden. Sind Sie damit einverstanden?</p>
+            <p class="text-gray-300 mb-4 md:mb-0 md:mr-6">Um unsere Seite zu verbessern und die besten Standorte für unsere Pods zu finden, nutzen wir Analyse-Tools. Mit Ihrer Zustimmung helfen Sie uns dabei. Mehr dazu erfahren Sie in unserer <a href='datenschutz.html' target='_blank' class='underline text-yellow-400 hover:text-yellow-300'>Datenschutzerklärung</a>.</p>
             <div class="flex-shrink-0 flex gap-4">
                 <button id="consent-accept" class="bg-yellow-400 text-gray-900 font-bold py-2 px-6 rounded-lg">Akzeptieren</button>
                 <button id="consent-decline" class="bg-gray-700 text-white font-bold py-2 px-6 rounded-lg">Ablehnen</button>
